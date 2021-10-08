@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sozluk7</title>
+</head>
+<body>
+
+Sözlük Burada
+
+
+<ul>
+    {%for baslik in basliklar%}
+  <li>
+      <a href="/{{baslik['_id']}}"> {{baslik["metin"]}} </a>
+  </li>
+    {%endfor%}
+</ul>
+
+</body>
+</html>
