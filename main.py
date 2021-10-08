@@ -16,8 +16,9 @@ yazilar_tablosu = mydb["yazilar"]
 @app.route('/')
 def baslangic():
     basliklar = basliklar_tablosu.find({})
+    yazilar = yazilar_tablosu.find({})
 
-    return render_template("anasayfa.html", basliklar=basliklar)
+    return render_template("anasayfa.html", basliklar=basliklar, yazilar=yazilar)
 
 
 if __name__ == "__main__":
