@@ -9,10 +9,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
-  .fakeimg {
-    height: 200px;
-    background: #aaa;
-  }
+
+      /* Style inputs */
+  input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  width: 100%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Add a background color to the submit button on mouse-over */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
   </style>
 </head>
 <body>
@@ -34,7 +59,7 @@
       {% endif %}
       {% if kullanici %}
         <li class="nav-item">
-        <a class="nav-link" href="/yenibaslik">Yeni Başlık</a>
+        <a class="nav-link active" href="/yenibaslik">Yeni Başlık</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/cikis">Çıkış</a>
@@ -44,34 +69,19 @@
   </div>
 </nav>
 
-<div class="container" style="margin-top:30px">
-  <div class="row">
-    <div class="col-sm-4">
-      <h2>Gündem</h2>
-      <ul class="nav nav-pills flex-column">
-          {%for baslik in basliklar%}
-          <li class="nav-item">
-              <a class="nav-link" href="/b/{{baslik['_id']}}"> {{baslik["metin"]}} </a>
-          </li>
-          {%endfor%}
 
 
 
-      </ul>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
+<div class="container">
+    <br>
+ <form action="/yenibaslik" method="post">
+  <label for="baslik">Başlık</label>
+  <input type="text" id="baslik" name="baslik" placeholder="Başlık..">
 
-        {%for yazi in yazilar%}
-          <h5>{{yazi["kullanici"]}}, {{yazi["paylasim_tarihi"]}}</h5>
-          <p>{{yazi["icerik"]}}</p>
-          <br>
-        {%endfor%}
-
-
-    </div>
-  </div>
+  <input type="submit" value="Kaydet">
+</form>
 </div>
+
+
 </body>
 </html>

@@ -49,9 +49,14 @@
     <div class="col-sm-4">
       <h2>Gündem</h2>
       <ul class="nav nav-pills flex-column">
-          {%for baslik in basliklar%}
+          {%for bslk in basliklar%}
           <li class="nav-item">
-              <a class="nav-link" href="/b/{{baslik['_id']}}"> {{baslik["metin"]}} </a>
+              {% if baslik["_id"] == bslk['_id'] %}
+            <a class="nav-link active" href="/b/{{bslk['_id']}}"> {{bslk["metin"]}} </a>
+              {% else %}
+            <a class="nav-link" href="/b/{{bslk['_id']}}"> {{bslk["metin"]}} </a>
+              {% endif %}
+
           </li>
           {%endfor%}
 
@@ -61,10 +66,14 @@
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
+      <h2>{{ baslik["metin"] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% if kullanici %}
+        <a href="/yeniyazi/{{baslik['_id']}}">[Yeni yazı..]</a>
+        {% endif %}
+      </h2>
 
         {%for yazi in yazilar%}
-          <h5>{{yazi["kullanici"]}}, {{yazi["paylasim_tarihi"]}}</h5>
+      <h5>{{yazi["kullanici"]["adsoyad"]}}, {{yazi["paylasim_tarihi"]}} </h5>
           <p>{{yazi["icerik"]}}</p>
           <br>
         {%endfor%}
