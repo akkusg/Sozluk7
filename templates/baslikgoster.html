@@ -8,11 +8,46 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script language="JavaScript">
+
+    //alert("Merhaba Dünya!");
+
+    function ac(id) {
+      document.getElementById("az_" + id).style.display = "none";
+      document.getElementById("cok_" + id).style.display = "block";
+      document.getElementById("ac_dugme_" + id).style.display = "none";
+      document.getElementById("kapat_dugme_" + id).style.display = "block";
+      return false;
+    }
+
+    function kapat(id) {
+      document.getElementById("az_" + id).style.display = "block";
+      document.getElementById("cok_" + id).style.display = "none";
+      document.getElementById("ac_dugme_" + id).style.display = "block";
+      document.getElementById("kapat_dugme_" + id).style.display = "none";
+      return false;
+    }
+
+
+  </script>
   <style>
   .fakeimg {
     height: 200px;
     background: #aaa;
   }
+
+
+  .complete{
+    display:none;
+}
+
+.more{
+    color:grey;
+    font-size:13px;
+    padding:3px;
+    cursor:pointer;
+}
   </style>
 </head>
 <body>
@@ -44,6 +79,7 @@
   </div>
 </nav>
 
+
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
@@ -51,11 +87,20 @@
       <ul class="nav nav-pills flex-column">
           {%for bslk in basliklar%}
           <li class="nav-item">
-              {% if baslik["_id"] == bslk['_id'] %}
-            <a class="nav-link active" href="/b/{{bslk['_id']}}"> {{bslk["metin"]}} </a>
-              {% else %}
-            <a class="nav-link" href="/b/{{bslk['_id']}}"> {{bslk["metin"]}} </a>
+            {% if baslik["_id"] == bslk['_id'] %}
+            <a class="nav-link active" href="/b/{{bslk['_id']}}"> {{bslk["metin"][:20]}}
+              {% if bslk["metin"]|length > 20 %}
+              ...
               {% endif %}
+            </a>
+            {% else %}
+            <a class="nav-link" href="/b/{{bslk['_id']}}"> {{bslk["metin"][:20]}}
+              {% if bslk["metin"]|length > 20 %}
+              ...
+              {% endif %}
+            </a>
+
+            {% endif %}
 
           </li>
           {%endfor%}
@@ -73,8 +118,23 @@
       </h2>
 
         {%for yazi in yazilar%}
-      <h5>{{yazi["kullanici"]["adsoyad"]}}, {{yazi["paylasim_tarihi"]}} </h5>
-          <p>{{yazi["icerik"]}}</p>
+
+          <p id="az_{{yazi['_id']}}" class="teaser">{{yazi["icerik"][:100]}}
+            {% if yazi["icerik"]|length > 100 %}
+          <span id="ac_dugme_{{yazi['_id']}}" class="more" style="display:block" onclick="ac('{{yazi['_id']}}')">daha fazla...</span>
+            {% endif %}
+          </p>
+          <p id="cok_{{yazi['_id']}}" class="complete">{{yazi["icerik"]}}
+          <span id="kapat_dugme_{{yazi['_id']}}" class="more" style="display:none" onclick="kapat('{{yazi['_id']}}')">daha az...</span>
+          </p>
+
+
+
+
+          <span class="float-right font-weight-light small">
+            [<a href="#">{{yazi["kullanici"]["adsoyad"]}}</a>]
+            {{yazi["paylasim_tarihi"].strftime('%d.%m.%Y %H:%M')}}
+          </span>
           <br>
         {%endfor%}
 

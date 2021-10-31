@@ -47,26 +47,6 @@ input[type=submit]:hover {
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      {% if not kullanici %}
-      <li class="nav-item">
-        <a class="nav-link" href="/giris">Giriş</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Kayıt ol</a>
-      </li>
-      {% endif %}
-      {% if kullanici %}
-        <li class="nav-item">
-        <a class="nav-link" href="/yenibaslik">Yeni Başlık</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/cikis">Çıkış</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
 </nav>
 
 
@@ -78,10 +58,11 @@ input[type=submit]:hover {
     {{baslik["metin"]}}
   </h2>
 
- <form action="/yeniyazi/{{baslik['_id']}}" method="post">
-  <label for="yazi">Yazı</label>
-  <textarea id="yazi" name="yazi" placeholder="Yazı..">
-  </textarea>
+<form action="/yeniyazi/{{baslik['_id']}}" method="post">
+  <div class="form-group">
+  <textarea class="form-control" rows="5" id="yazi" name="yazi" placeholder="Yazı.."></textarea>
+  </div>
+
 
   <input type="submit" value="Kaydet">
 </form>

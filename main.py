@@ -14,10 +14,14 @@ basliklar_tablosu = mydb["basliklar"]
 yazilar_tablosu = mydb["yazilar"]
 
 
+@app.route('/api')
+def get_api():
+    return "{'baslik': 'yemek-1'}"
+
 @app.route('/')
 def baslangic():
     basliklar = basliklar_tablosu.find({}).sort([("_id",pymongo.DESCENDING)])
-    yazilar = yazilar_tablosu.find({})
+    yazilar = yazilar_tablosu.find({}).sort([("_id",pymongo.DESCENDING)])
     kayit = None
     if 'kullanici' in session:
         kayit = session["kullanici"]
