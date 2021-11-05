@@ -51,7 +51,7 @@
       <ul class="nav nav-pills flex-column">
           {%for baslik in basliklar%}
           <li class="nav-item">
-              <a class="nav-link" href="/b/{{baslik['_id']}}"> {{baslik["metin"][:20]}}
+              <a class="nav-link" href="/b/{{baslik['_id']}}/1"> {{baslik["metin"][:20]}}
               {% if baslik["metin"]|length > 20 %}
               ...
               {% endif %}

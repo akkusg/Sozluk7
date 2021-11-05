@@ -5,6 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -88,13 +92,13 @@
           {%for bslk in basliklar%}
           <li class="nav-item">
             {% if baslik["_id"] == bslk['_id'] %}
-            <a class="nav-link active" href="/b/{{bslk['_id']}}"> {{bslk["metin"][:20]}}
+            <a class="nav-link active" href="/b/{{bslk['_id']}}/1"> {{bslk["metin"][:20]}}
               {% if bslk["metin"]|length > 20 %}
               ...
               {% endif %}
             </a>
             {% else %}
-            <a class="nav-link" href="/b/{{bslk['_id']}}"> {{bslk["metin"][:20]}}
+            <a class="nav-link" href="/b/{{bslk['_id']}}/1"> {{bslk["metin"][:20]}}
               {% if bslk["metin"]|length > 20 %}
               ...
               {% endif %}
@@ -111,11 +115,27 @@
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
-      <h2>{{ baslik["metin"] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <h2>
+
+
+        {{ baslik["metin"] }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% if kullanici %}
         <a href="/yeniyazi/{{baslik['_id']}}">[Yeni yazı..]</a>
         {% endif %}
+
+        {% if onceki_sayfa_no > 0 %}
+        <a href="{{onceki_sayfa_no}}"><i class="icon-circle-arrow-left"></i></a>
+        {% endif %}
+        &nbsp;{{ sayfa_no }}&nbsp;
+        {% if sonraki_sayfa_var %}
+        <a href="{{sonraki_sayfa_no}}"><i class="icon-circle-arrow-right"></i></a>
+        {% endif %}
+
+
       </h2>
+
+
+
 
         {%for yazi in yazilar%}
 
